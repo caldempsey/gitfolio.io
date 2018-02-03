@@ -1,0 +1,25 @@
+{% extends 'template_extensions/base.html' %}
+{% load staticfiles %}
+
+{# Override for head.html declaring custom data#}
+{% block head %}
+    <!-- Custom styles for this template -->
+    <link href="{% static "css/signin.css" %}" rel="stylesheet">
+    <link href="{% static "libs/bootstrap-social-gh-pages/bootstrap-social.css" %}" rel="stylesheet">
+    <link href="{% static "libs/bootstrap-social-gh-pages/assets/css/font-awesome.css" %}" rel="stylesheet">
+
+{% endblock %}
+
+{% block body %}
+    <body class="text-center" data-gr-c-s-loaded="true">
+
+    <form class="form-signin" wtx-context="01EF4065-AB5A-4398-941A-1403BE47F645" method="post">
+        <a href="{% url 'social:begin' 'github' %}" class="btn btn-block btn-social btn-github"
+           onclick="_gaq.push(['_trackEvent', 'btn-social', 'click', 'btn-github']);">
+            <span class="fa fa-github"></span> Sign in with GitHub
+        </a>
+        <p class="mt-5 mb-3 text-muted">© Callum Dempsey Leach 2018</p>
+    </form>
+    </body>
+{% endblock %}
+

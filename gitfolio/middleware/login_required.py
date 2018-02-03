@@ -1,7 +1,16 @@
+import re
 from django.shortcuts import redirect
 
 # Login Required Middleware Exceptions
-urls_exception_list = ['/']
+from django.urls import include
+
+urls_exception_list = [
+    "/",
+    "logout",
+    "login",
+    "oauth/([a-z]+|/)+",
+]
+
 
 class LoginRequiredMiddleware:
     """
@@ -38,7 +47,14 @@ class LoginRequiredMiddleware:
         assert hasattr(request, 'user')
         # Iterates through accepted list of URLS (check syntax) and identifies if the URL is in the list of exceptions.
         # As of Django 2.0 is_authenticated is an attribute of the request.
+        if request.user.is_authenticated:
+            return None
+        # Combine urls using | operator on regex to produce regular expression statement.
+        urls = "(" + ")|(".join(urls_exception_list) + ")"
+        print(urls)
+        if re.match(urls, path):
+            return None
         if path in urls_exception_list or request.user.is_authenticated:
             return None
-        else:
-            return redirect('interface_login:login')
+        print("Invalid path "+str(path))
+        return redirect('interface_authenticate:login')

@@ -1,0 +1,12 @@
+{% extends 'template_extensions/base.html' %}
+{% load staticfiles %}
+
+{# No override for head.html #}
+
+{% block body %}
+<body>
+  <h2>Homepage</h2>
+  <p>Hello {{ user.username }}!</p>
+</body>
+{% endblock %}
+

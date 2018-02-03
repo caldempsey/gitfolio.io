@@ -5,4 +5,4 @@ class PublicInterfaceConfig(AppConfig):
     """
     Defines the package as a Django application with the specified name.
     """
-    name = 'interface_login'
+    name = 'interface_authenticate'

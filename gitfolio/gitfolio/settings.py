@@ -13,6 +13,8 @@ https://docs.djangoproject.com/en/2.0/ref/settings/
 import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
+from django.urls import reverse_lazy
+
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # Quick-start development settings - unsuitable for production
@@ -24,7 +26,7 @@ SECRET_KEY = '=7-_+p6h1id-1!&r-y878vcngg-8*k+aw^p3d2t97v9ehd-7-h'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['gitfolio.io']
 
 # Application definition
 
@@ -35,7 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'interface_login',
+    'interface_authenticate',
     'social_django',
     'middleware',
 ]
@@ -49,7 +51,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'social_django.middleware.SocialAuthExceptionMiddleware',
-    'middleware.login_required.LoginRequiredMiddleware',
+#    'middleware.login_required.LoginRequiredMiddleware',
 ]
 
 ROOT_URLCONF = 'gitfolio.urls'
@@ -134,3 +136,11 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     "interface_dependencies"
 ]
+
+#Authentication Backend Settings
+
+LOGIN_REDIRECT_URL = ('interface_authenticate:dashboard')
+LOGIN_URL = reverse_lazy('login')
+LOGOUT_URL = reverse_lazy('logout')
+SOCIAL_AUTH_GITHUB_KEY = "ab11cd908450f2a4ea51"
+SOCIAL_AUTH_GITHUB_SECRET = "52146d615102460d84d5d4f29c76bec54561f4ac"

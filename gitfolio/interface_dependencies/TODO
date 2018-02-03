@@ -1,1 +1,18 @@
 Interface dependencies could be invalid in non-development environment, will have to look until this later (they use relative directories, not absolute static pathing)
+Write a guide on https://www.linkedin.com/learning/django-2-building-a-social-website/adding-social-authentication-to-your-site for new users
+Interface dependencies must (will) require additional setup
+maybe write a quick CLI tool for it
+
+dashboard contains button to add new portfolio from existing repositories, pop up checklist box (or define custom)
+
+
+Album setting.
+
+Your portfolios
+
+Your repos
+
+-Import repo data from github
+- custom model form (logo / description / title / link)
+
+mmacheerpuppy.gitfolio.io
