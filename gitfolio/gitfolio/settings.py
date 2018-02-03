@@ -57,7 +57,7 @@ ROOT_URLCONF = 'gitfolio.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates'),],
+        'DIRS': [os.path.join(BASE_DIR, 'interface_dependencies')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -126,5 +126,5 @@ STATIC_URL = '/static/'
 # Define static files for each "NON" application i.e. the templates dir.
 
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "static"),
+    "interface_dependencies"
 ]

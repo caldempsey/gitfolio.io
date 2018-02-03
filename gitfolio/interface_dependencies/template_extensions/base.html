@@ -1,0 +1,37 @@
+{# base.html  #}
+{# All applications which provide interfaces inherit from base.html, you can think of this as a global template #}
+{# Simple example usage found in interface_login app/login.html #}
+{% load staticfiles %}
+<!DOCTYPE HTML>
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="gitfolio is a portfolio for your git repositories">
+    <meta name="author" content="Callum Dempsey Leach">
+    <link rel="icon" href="{% static "ico/favicon.ico" %}">
+    <title>gitfolio</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="{% static "libs/bootstrap-4.0.0-dist/css/bootstrap.min.css" %}" rel="stylesheet">
+
+    <!-- Any additional header content will feature here -->
+    {# Override head block to append content for html head #}
+
+    {% block head %}
+
+    {% endblock %}
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+{# Override body block to append content for html body (include body tags incase of class override) #}
+{% block body %}
+    <body>
+    </body>
+{% endblock %}
+</html>

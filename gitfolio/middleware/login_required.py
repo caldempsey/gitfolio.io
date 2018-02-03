@@ -3,7 +3,6 @@ from django.shortcuts import redirect
 # Login Required Middleware Exceptions
 urls_exception_list = ['/']
 
-
 class LoginRequiredMiddleware:
     """
     The LoginRequiredMiddleware provides the functionality to prevent access to the website to unauthorized users.
@@ -38,7 +37,8 @@ class LoginRequiredMiddleware:
         #  something seriously wrong, see https://docs.djangoproject.com/en/1.11/ref/request-response/#attributes).
         assert hasattr(request, 'user')
         # Iterates through accepted list of URLS (check syntax) and identifies if the URL is in the list of exceptions.
-        if path in urls_exception_list or request.user.is_authenticated():
+        # As of Django 2.0 is_authenticated is an attribute of the request.
+        if path in urls_exception_list or request.user.is_authenticated:
             return None
         else:
-            return redirect('public_interfaces:login')
+            return redirect('interface_login:login')
