@@ -26,7 +26,11 @@ SECRET_KEY = '=7-_+p6h1id-1!&r-y878vcngg-8*k+aw^p3d2t97v9ehd-7-h'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['gitfolio.io']
+ALLOWED_HOSTS = [
+    'gitfolio.io',
+    'localhost',
+    '127.0.0.1'
+]
 
 # Application definition
 
@@ -38,8 +42,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'interface_authenticate',
+    'interface_dashboard',
     'social_django',
-    'middleware',
 ]
 
 MIDDLEWARE = [
@@ -51,7 +55,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'social_django.middleware.SocialAuthExceptionMiddleware',
-#    'middleware.login_required.LoginRequiredMiddleware',
+    'interface_authenticate.middleware.LoginRequiredMiddleware',
 ]
 
 ROOT_URLCONF = 'gitfolio.urls'
@@ -134,12 +138,12 @@ STATIC_URL = '/static/'
 # Define static files for each "NON" application i.e. the templates dir.
 
 STATICFILES_DIRS = [
-    "interface_dependencies"
+    "interface_dependencies",
 ]
 
 #Authentication Backend Settings
 
-LOGIN_REDIRECT_URL = ('interface_authenticate:dashboard')
+LOGIN_REDIRECT_URL = ('interface_authenticate:login')
 LOGIN_URL = reverse_lazy('login')
 LOGOUT_URL = reverse_lazy('logout')
 SOCIAL_AUTH_GITHUB_KEY = "ab11cd908450f2a4ea51"

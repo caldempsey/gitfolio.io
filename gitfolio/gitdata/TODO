@@ -1,1 +1,3 @@
 App for repo scraping and storage supporting a number of interfaces / libs
+Scrapes and adds to the model
+Requires a user as a foreign key

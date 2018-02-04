@@ -1,45 +1,58 @@
-from django.contrib import auth
 from django.shortcuts import render, redirect
 from django.views.generic import View
+
+from interface_authenticate.communicate.auth import logout, logout_silent
+from interface_authenticate.communicate.user import username_present
 
 
 # TODO Build such that if user is not logged in then instance login view class
 # TODO Build index handler
 
-class LoginView(View):
+class LoginAuthHandler(View):
     """
-    LoginView is responsible for facilitating the task of providing a login interface.
+    The AuthHandler class is responsible for determining whether users are sent to their profile page (are logged in)
+    or the root page "/".
     """
-    index_template = 'index.html'
-    login_template = 'login.html'
 
+    login_template = "login.html"
     def get(self, request):
         if request.user.is_authenticated:
-            return render(request, self.index_template)
+            # Username present in the communicator package will communicate with the Django messages framework to
+            # inform if there are issues with the account.
+            if username_present(request):
+                return redirect("/" + request.user.username)
+            else:
+                # Logout silent logs the user out but does not post to the Django messages framework (logs are still
+                # recorded)
+                logout_silent(request)
+                return redirect("/")
         return render(request, self.login_template)
 
     def post(self, request):
         """
-        Handles login template details from users.
+        Determined where the login request goes when the user logs in.
         """
-        return redirect(request, self.login_template)
+        if request.user.is_authenticated:
+            if username_present(request):
+                return redirect("/" + request.user.username)
+            else:
+                logout_silent(request)
+        return redirect("/")
 
-class Dashboard(View):
+
+class LogoutAuthHandler(View):
     """
-    LoginView is responsible for facilitating the task of providing a login interface.
-    """
-    index_template = 'index.html'
-
-    def get(self, request):
-        return render(request, self.index_template)
-
-
-class LogoutView(View):
-    """
-    LogoutVIew is responsible for logging out users when called.
+    The AuthHandler class is responsible for determining whether users are sent to their profile page (are logged in)
+    or the root page "/".
     """
 
     def get(self, request):
-        # Django shortcut to cleanly logout a user from a request.
-        auth.logout(request)
-        return redirect('/')
+        if request.user.is_authenticated:
+            if username_present(request):
+                logout(request)
+                return redirect("/" + request.user.username)
+            else:
+                logout_silent(request)
+            return redirect("/")
+        return redirect("/")
+

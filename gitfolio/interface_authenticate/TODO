@@ -1,0 +1,6 @@
+Provides methods for forcing authentication before being able to go to the index.
+Requires installing the middleware.
+Will redirect to /username after logging the user in by default
+In this package, implemented with social authentication.
+Will send error messages to the Django messages framework.
+Acts as the "firewall" to preventing unauthorized user access.

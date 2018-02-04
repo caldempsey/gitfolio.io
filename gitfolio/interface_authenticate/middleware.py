@@ -51,10 +51,8 @@ class LoginRequiredMiddleware:
             return None
         # Combine urls using | operator on regex to produce regular expression statement.
         urls = "(" + ")|(".join(urls_exception_list) + ")"
-        print(urls)
         if re.match(urls, path):
             return None
         if path in urls_exception_list or request.user.is_authenticated:
             return None
-        print("Invalid path "+str(path))
         return redirect('interface_authenticate:login')
